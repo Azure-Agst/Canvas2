@@ -1,0 +1,55 @@
+# ==================================== #
+# deploy.yml                           #
+# canvas2's main distribution workflow #
+# ==================================== #
+
+# Define Name
+name: Deploy Suite
+
+# Description:
+#   This actions workflow was designed to SSH into a server using Actions Secrets
+#   and execute a one-line command that could be used to deploy your code. In this
+#   case we SSH into our server, git pull our private repo using a deploy key, and
+#   then restart our service.
+
+# TODO:
+# - Configure SSH command to actually restart the service. May have to write a bash
+#   script to make it work.
+
+#
+# ===== [ Triggers ] ==========================================================
+#
+
+# Reasoning:
+#   By this point, our testing.yml file should have validated the code before
+#   the merge, so unless there are any major conflicts, we should be okay to
+#   run our deploy script. Therefore, run after merge on main.
+
+on: 
+  push:
+    branches:
+    - main
+
+#
+# ===== [ Jobs ] ==============================================================
+#
+
+jobs:
+
+  # 1.) Deploy Script
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+
+    # 1.1.) SSH script
+    # Uses SSH to pull main on server, only on new commits in main
+    # Auditing: https://github.com/appleboy/ssh-action
+    - name: SSH & Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host:  ${{ secrets.HOSTNAME }}
+        username:  ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: cd canvas2 && git pull && echo "Actions was here!" >> ~/.actions.log
+  
