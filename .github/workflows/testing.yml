@@ -1,0 +1,77 @@
+# =============================== #
+# testing.yml                     #
+# canvas2's main testing workflow #
+# =============================== #
+
+# Name:
+name: Testing Suite
+
+# Description:
+#   This actions workflow was designed to run tests surrounding a Python 3.x dev
+#   environment. It uses Flask8 for linting, and pytest for testing. (Notably,
+#   it can be easily modified to use any other testing library instead.)
+
+#
+# ===== [ Triggers ] ==========================================================
+#
+
+# Reasoning:
+#   We want testing on all pull requests merging into a major upstream, to ensure
+#   code quality. Simultaneously, we also want to test each branch after merges
+#   to ensure conflicts don't cause issues. Therefore, we run tests on the source 
+#   branch before merge (pull_request) and again on the commits after the merge 
+#   (push) using the syntax below.
+
+on: 
+  push:
+    branches:
+    - main
+    - develop
+  pull_request:
+    branches:
+    - main
+    - develop
+
+#
+# ===== [ Jobs ] ==============================================================
+#
+
+jobs:
+
+  # 1.) Testing Suite
+  testing:
+    name: Pytest
+    runs-on: ubuntu-latest
+    steps:
+
+    # 1.1.) Set up workspace
+    - name: Set up workspace
+      uses: actions/checkout@v1
+
+    # 1.2.) Install Python 3.x
+    - name: Install Python
+      uses: actions/setup-python@v1
+      with: 
+        python-version: '3.x'
+        architecture: 'x64'
+    
+    # 1.3.) Install packages in requirements.txt
+    - name: Install packages
+      working-directory: .
+      run: pip3 install -r requirements.txt
+
+    # 1.4.) Lint with Flake8
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    # 1.5.) Pytest
+    - name: Test with pytest
+      run: |
+        # install local packages in development mode, for import by pytest
+        pip3 install -e .
+        # run pytest within folder "tests" with increased verbosity
+        python3 -m pytest tests -v
