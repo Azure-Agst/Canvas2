@@ -42,6 +42,9 @@ jobs:
   testing:
     name: Pytest
     runs-on: ubuntu-latest
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
 
     # 1.1.) Set up workspace
