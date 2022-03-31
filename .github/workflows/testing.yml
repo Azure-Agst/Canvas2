@@ -60,10 +60,10 @@ jobs:
     - name: Install MongoDB
       uses: supercharge/mongodb-github-action@1.7.0
       with:
-        verion: '5.0'
+        mongodb-version: '5.0'
         mongodb-username: github-ci
         mongodb-password: temppass
-        mongodb-db: canvas2
+        mongodb-db: canvas2_test
     
     # 1.3.) Install packages in requirements.txt
     - name: Install packages
