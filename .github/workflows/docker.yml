@@ -8,7 +8,8 @@ name: Docker Deploy
 
 # Description:
 #   This actions workflow was designed to compile our image and upload it to
-#   the Github Container Registry.
+#   the Github Container Registry. It also shells into our server and tells
+#   it to update.
 
 #
 # ===== [ Triggers ] ==========================================================
@@ -59,4 +60,22 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ghcr.io/fsu-cop4521s/canvas2:latest
+  
+  # 2.) Deploy Script
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+    # 2.1.) SSH script
+    # Uses SSH to pull main on server, only on new commits in main
+    # Auditing: https://github.com/appleboy/ssh-action
+    - name: SSH & Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host:  ${{ secrets.HOSTNAME }}
+        username:  ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: docker pull ghcr.io/fsu-cop4521s/canvas2 && docker restart canvas2
   
