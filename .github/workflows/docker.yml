@@ -14,25 +14,14 @@ name: Docker Deploy
 # ===== [ Triggers ] ==========================================================
 #
 
-# This will only run if the following conditions are met:
-# - Testing Suite was run and passed
-# - We're on the "develop" branch
+# NOTE: Originally this was supposed to have an 'on_workflow' trigger so it
+#       would only run after test passes. However there was no reliable way
+#       to test this, so I ditched it. Now it just runs on tagged releases.
 
-# NOTE: When we first release, this will be set to run on "main" branch.
-#       Well, either that or on tagged version releases. I'm fine with
-#       either. -A
-
-on: 
+on:
   push:
     branches:
-    - 'f/docker'
-  workflow_run:
-    workflows: ["Testing Suite"]
-    types: 
-    - completed
-    branches:
-    - 'develop'
-    - 'f/docker'
+    - 'v*'
 
 #
 # ===== [ Jobs ] ==============================================================
@@ -42,7 +31,7 @@ jobs:
 
   # 1.) Build Script
   build:
-    name: Build
+    name: Build Docker Image
     runs-on: ubuntu-latest
     steps:
 
