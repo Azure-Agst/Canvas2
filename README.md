@@ -13,6 +13,14 @@
 
 ## Running
 
+### New! Docker
+
+Users authenticated with the GitHub Container Registry can use our Docker image to get things up and running! Just put all required env vars in `.flaskenv` and run the following command:
+
+```bash
+docker run -d --env-file=".flaskenv" -p 5000:5000 ghcr.io/fsu-cop4521s/canvas2
+```
+
 ### Development
 
 - Put all env vars in `.flaskenv` then use `flask run`.
