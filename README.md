@@ -1,5 +1,19 @@
 # Canvas 2.0
 
+## Project Description
+
+Canvas 2 seeks to combine Canvas and Turnitin into one sleek web app that professors can use to manage assignments for their classes with plagiarism detection.
+
+## List of Libraries
+
+See `requirements.txt`.
+
+## Distribution of Work
+
+- Andrew Augustine (azure_agst): Initial project structure, database design, testing, containerization, server configuration
+- Peter Vasiljev (pv-230): All frontend design (Flask, Jinja2 templates, CSS/JS), testing, contributions to backend development
+- Shreay Patel (shreayp): Integration of plagiarism detection via Jaccard/Simhash algos, testing, contributions to backend development
+
 ## Setup
 
 - Clone the repo to your location of choice.
@@ -8,8 +22,7 @@
   - Pro Tip: you can use the `.` shorthand for `source` in some shells
 - Install requirements using `pip3 install -r requirements.txt`
 - Make sure `.flaskenv` is up to date :)
-
------
+- Run using `flask run`
 
 ## Running
 
@@ -31,8 +44,6 @@ docker run -d --env-file=".flaskenv" -p 5000:5000 ghcr.io/fsu-cop4521s/canvas2
 - `waitress-serve --call 'canvas2:create_app'`
   - Waitress does NOT use `.flaskenv`, but then again all variables that would have been specified in that file should be configured server-side anyway.
 
------
-
 ## Testing
 
 - Install the `canvas2` package in development mode using `pip3 install -e .`
@@ -44,8 +55,6 @@ docker run -d --env-file=".flaskenv" -p 5000:5000 ghcr.io/fsu-cop4521s/canvas2
 - You can also run coverage tests with `coverage run -m pytest`
   - After running, generate a report using `coverage report`
 
------
-
 ## References
 
-Flask Tutorial: https://flask.palletsprojects.com/en/2.0.x/tutorial/
+Icons Used: https://materialdesignicons.com/
