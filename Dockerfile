@@ -22,6 +22,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # =============================================================================
 COPY . .
 
+# Download NLTK files
+# =============================================================================
+RUN python3 -m nltk.downloader stopwords brown omw-1.4 wordnet punkt
+
 # Expose ports
 # =============================================================================
 EXPOSE 5000/tcp
