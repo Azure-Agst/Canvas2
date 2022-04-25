@@ -3,7 +3,7 @@
 
 FROM python:3
 LABEL org.opencontainers.image.authors="me@azureagst.dev"
-LABEL org.opencontainers.image.source="https://github.com/fsu-cop4521s/canvas2"
+LABEL org.opencontainers.image.source="https://github.com/azure-agst/canvas2"
 
 # Set our image's working directory
 # =============================================================================
