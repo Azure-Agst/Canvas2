@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# NOTE: this is currently in prod on the server.
-#       it isnt run by anything inside the project, but
-#       should be located at /home/$(whoami)/ :)
+# NOTE: this was in prod on the server we used to host the webapp.
+#       its important to remember that the repo now lives in my account,
+#       rather than the old `fsu-cop4521s` account. therefore this script
+#       wont work anymore, but can be used as reference! :)
 
 # pull latest image
 echo -e "\npulling latest image..."

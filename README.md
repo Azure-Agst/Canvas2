@@ -2,17 +2,21 @@
 
 ## Project Description
 
-Canvas 2 seeks to combine Canvas and Turnitin into one sleek web app that professors can use to manage assignments for their classes with plagiarism detection.
+Hey all! This repository is an archive of a project that I worked on for my Secure, Parallel and Distributed Programming in Python class in my Spring 2022 semester of college. The semester project team up and "design and implement an application that solves a real-world problem in Python." According to the prompt: "the project should prominently feature aspects of Information Management, Secure Computing, Parallel Computing, and Distributed Computing"
 
-## List of Libraries
+So, for this class I decided up to group up with my old friend Peter Vasiljev ([@pv-230](https://github.com/pv-230)) and my new friend Shreay Patel ([@shreayp](https://github.com/shreayp)) to reimplement the popular learning management service, Canvas. Canvas 2 seeks to combine Canvas and Turnitin into one sleek web app that professors can use to manage assignments for their classes with plagiarism detection built-in. Working with Peter and Shreay was a blast; I think we all learned a lot from this project, and it's one of the best flask projects I've made in a while. It's most certainly the one I'm the most proud of.
 
-See `requirements.txt`.
+I hope you all enjoy our work! :)
 
 ## Distribution of Work
 
 - Andrew Augustine (azure_agst): Initial project structure, database design, testing, containerization, server configuration
 - Peter Vasiljev (pv-230): All frontend design (Flask, Jinja2 templates, CSS/JS), testing, contributions to backend development
 - Shreay Patel (shreayp): Integration of plagiarism detection via Jaccard/Simhash algos, testing, contributions to backend development
+
+## List of Libraries
+
+See `requirements.txt`.
 
 ## Setup
 
@@ -31,7 +35,7 @@ See `requirements.txt`.
 Users authenticated with the GitHub Container Registry can use our Docker image to get things up and running! Just put all required env vars in `.flaskenv` and run the following command:
 
 ```bash
-docker run -d --env-file=".flaskenv" -p 5000:5000 ghcr.io/fsu-cop4521s/canvas2
+docker run -d --env-file=".flaskenv" -p 5000:5000 ghcr.io/azure-agst/canvas2
 ```
 
 ### Development
