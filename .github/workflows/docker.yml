@@ -59,12 +59,13 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/fsu-cop4521s/canvas2:latest
+        tags: ghcr.io/azure-agst/canvas2:latest
   
   # 2.) Deploy Script
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
+    if: ${{ false }} # NOTE: Archive doesnt have a server, skip!
     needs: build
     steps:
 
